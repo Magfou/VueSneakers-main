@@ -38,14 +38,14 @@ const addToFavorite = async (item) => {
         item
       }
       item.isFavorite = true
-      const { data } = await axios.post(`https://c62d441103464330.mokky.dev/favorites`, obj) // Отправляем POST-запрос для добавления элемента в избранное
+      const { data } = await axios.post(`https://e433e862f86d8216.mokky.dev/favorites`, obj) // Отправляем POST-запрос для добавления элемента в избранное
 
       item.favoriteId = data.id // Присваиваем элементу идентификатор избранного
     } else {
       // Если элемент уже является избранным
       item.isFavorite = false // Устанавливаем флаг isFavorite в false
 
-      await axios.delete(`https://e433e862f86d8216.mokky.dev/orders/${item.favoriteId}`) // Отправляем DELETE-запрос для удаления элемента из избранного
+      await axios.delete(`https://e433e862f86d8216.mokky.dev/favorites/${item.favoriteId}`) // Отправляем DELETE-запрос для удаления элемента из избранного
       item.favoriteId = null // Сбрасываем идентификатор избранного
     }
   } catch (error) {
@@ -56,7 +56,7 @@ const addToFavorite = async (item) => {
 const fetchFavorites = async () => {
   try {
     // Отправляем GET-запрос для получения избранных элементов
-    const { data: favorites } = await axios.get(`https://e433e862f86d8216.mokky.dev/orders`)
+    const { data: favorites } = await axios.get(`https://e433e862f86d8216.mokky.dev/favorites`)
     // Обновляем массив элементов для отметки избранных
     items.value = items.value.map((item) => {
       // Проверяем, является ли текущий элемент избранным
